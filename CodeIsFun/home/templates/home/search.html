@@ -1,0 +1,34 @@
+{% extends 'home/base.html' %}
+{% block title %}
+Search Results
+{% endblock title %}
+
+
+{% block body %}
+<div class="container mt-4 mb-4">
+   {% if post|length < 1 %}
+    <p> Your search - {{ query| truncatechars:100 }} - did not match any Article.<br></p>
+    <p>Suggestions:<br></p>
+    <ul>
+
+        <li>Make sure that all words are spelled correctly.</li><br>
+        <li>Try different keywords.</li><br>
+        <li>Try more general keywords.</li>
+    </ul>
+    {% endif %}
+</div>
+{% for post in post %}
+<div class="container">
+    <h3 class="mt-4">Search Results</h3>
+    <div class="card my-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <h6>{{ post.author }}, {{ post.timeStamp }}</h6>
+        <p class="card-text">{{ post.content| truncatechars:500 }}</p>
+        <a href="{% url 'blog:post' post.slug %}" role="button" class="btn btn-outline-primary stretched-link">Continue Reading</a>
+      </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock body %}

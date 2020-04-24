@@ -1,0 +1,79 @@
+{% extends 'home/base.html' %}
+{% block title %}
+ CodeIsFun 
+{% endblock title %}
+
+{% block css %}
+.main {
+    width: 100%;
+
+}
+{% endblock css %}
+
+{% block body %}
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">CodeIsFun</h1>
+        <p class="lead">You can express yourself by word</p>
+        <p class="lead">
+        <a class="btn btn-primary btn-lg my-3" href="{% url 'blog:index' %}" role="button">Got to Blog</a>
+        </p>
+  </div>
+</div>
+<div class="container">
+<div class="row main">
+    <div class="col-md-8">
+        <h3>Latest Post</h3>
+        <div class="card mb-4 mt-4">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <h6>{{ post.author }}, {{ post.timeStamp }}</h6>
+              <p class="card-text">{{ post.content| truncatechars:500 }}</p>
+                <a href="{% url 'home:post' %}" class="stretched-link">Continue Reading</a>
+            </div>
+        </div>
+        <div class="card mb-4 mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <h6>Author, Dec 7, 2017</h6>
+              <p class="card-text">This is a wider card with supporting text below as a natural.</p>
+                <a href="#" class="stretched-link">Continue Reading</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3>Popular Post</h3>
+        <div class="list-group mt-4">
+          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+          <a href="#" class="list-group-item list-group-item-action ">This is a primary list group item</a>
+          <a href="#" class="list-group-item list-group-item-action ">This is a secondary list group item</a>
+          <a href="#" class="list-group-item list-group-item-action ">This is a success list group item</a>
+          <a href="#" class="list-group-item list-group-item-action ">This is a danger list group item</a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="container my-4">
+    <h3 class="text-center pb-3">Contact Us </h3>
+    <form method="post" action="{% url 'home:contact' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="form-group">
+                  <input type="text" name="name1" class="form-control" id="name1" placeholder="Enter Your Name">
+                </div>
+                <div class="form-group">
+                  <input type="email" name="email" class="form-control" id="email" placeholder="Enter Your Email">
+                </div>
+                <div class="form-group ">
+                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Your Phone Number with country code">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="content" id="content" cols="30" rows="5" placeholder="Enter Your Query"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Send</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock body %}
