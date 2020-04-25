@@ -1,19 +1,40 @@
 {% extends 'home/base.html' %}
 {% block title %}
- All Blog
+All Blog
 {% endblock title %}
 
 {% block body %}
 
 <div class="container">
-    <h3 class="mt-4">Article</h3>
-    <div class="card my-3">
-      <div class="card-body">
-        <h5 class="card-title">{{ post.title }}</h5>
-        <h6>{{ post.author }}, {{ post.timeStamp }}</h6>
-        <p class="card-text">{{ post.content }}</p>
-      </div>
+  <h3 class="mt-4">Article</h3>
+  <div class="card my-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ post.title }}</h5>
+      <h6>{{ post.author }}, {{ post.timeStamp }}</h6>
+      <p class="card-text">{{ post.content }}</p>
     </div>
+  </div>
+  <h3 class="mt-4">You can share your views with us </h3>
+  <form method="POST" action="{% url 'blog:comment' %}">
+   {% csrf_token %}
+    <div class="form-group mt-3">
+      <input type="text" class="form-control w-100" name="comment" id="comment" placeholder="Enter your comment">
+      <input type="hidden" name="postId" value="{{ post.sno }}">
+      <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </div>
+  </form>
+  <h3>Comments</h3>
+  {% for comments in comments %}
+  <div class="card mb-3 w-100">
+    <div class="card-body">
+      <h5 class="card-title">{{ comments.user.username }}</h5>
+      <p class="card-text"><small class="text-muted">{{ comments.addedTime }}</small></p>
+      <p class="card-text">{{ comments.comment }}</p>
+    </div>
+  </div>
+  {% endfor %}
 </div>
+</div>
+
 
 {% endblock body %}
