@@ -1,4 +1,4 @@
-App name 
-Blog
-Account
-Home
+App name -
+Blog,
+Account,
+Home,
