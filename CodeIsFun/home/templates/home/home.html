@@ -1,79 +1,62 @@
 {% extends 'home/base.html' %}
-{% block title %}
- CodeIsFun 
-{% endblock title %}
+{% load static %}
+{% block title %}CodeIsFun | {{ user.username }}{% endblock title %}
 
 {% block css %}
 .main {
     width: 100%;
-
+}
+.jumbotron{
+    height: 500px;
+}
+.main{
+margin-top :100px;
+}
+div.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 {% endblock css %}
 
 {% block body %}
-<div class="jumbotron">
-    <div class="container">
-        <h1 class="display-4">CodeIsFun</h1>
-        <p class="lead">You can express yourself by word</p>
-        <p class="lead">
-        <a class="btn btn-primary btn-lg my-3" href="{% url 'blog:index' %}" role="button">Got to Blog</a>
-        </p>
+<div class="jumbotron jumbotron-fluid mb-5">
+  <div class="container">
+    <h1 class="display-3 main text-black"><strong><span id="typed"></span></strong></h1>
   </div>
 </div>
-<div class="container">
+<div class="container mb-5">
 <div class="row main">
-    <div class="col-md-8">
-        <h3>Latest Post</h3>
-        <div class="card mb-4 mt-4">
+    <div class="col">
+        <h1>Latest Post</h1>
+        <hr style="height:3px;border:none;color:#333;background-color:#333;" />
+        {% for post in post %}
+        <div class="card my-4">
             <div class="card-body">
-              <h5 class="card-title">{{ post.title }}</h5>
-              <h6>{{ post.author }}, {{ post.timeStamp }}</h6>
-              <p class="card-text">{{ post.content| truncatechars:500 }}</p>
-                <a href="{% url 'home:post' %}" class="stretched-link">Continue Reading</a>
+              <h2 class="title">{{ post.title }}</h2>
+              <h4>Posted by {{ post.author }} on {{ post.timeStamp }}</h4>
+              <p class="text">{{ post.content| truncatechars:500 }}
+              <a href="{% url 'blog:post' post.slug %}" class="stretched-link text-dark font-weight-bold">Continue Reading</a></p>
             </div>
         </div>
-        <div class="card mb-4 mt-4">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6>Author, Dec 7, 2017</h6>
-              <p class="card-text">This is a wider card with supporting text below as a natural.</p>
-                <a href="#" class="stretched-link">Continue Reading</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <h3>Popular Post</h3>
-        <div class="list-group mt-4">
-          <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-          <a href="#" class="list-group-item list-group-item-action ">This is a primary list group item</a>
-          <a href="#" class="list-group-item list-group-item-action ">This is a secondary list group item</a>
-          <a href="#" class="list-group-item list-group-item-action ">This is a success list group item</a>
-          <a href="#" class="list-group-item list-group-item-action ">This is a danger list group item</a>
-        </div>
+        {% endfor %}
     </div>
 </div>
 </div>
-<div class="container my-4">
-    <h3 class="text-center pb-3">Contact Us </h3>
-    <form method="post" action="{% url 'home:contact' %}">
-        {% csrf_token %}
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="form-group">
-                  <input type="text" name="name1" class="form-control" id="name1" placeholder="Enter Your Name">
-                </div>
-                <div class="form-group">
-                  <input type="email" name="email" class="form-control" id="email" placeholder="Enter Your Email">
-                </div>
-                <div class="form-group ">
-                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Enter Your Phone Number with country code">
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" name="content" id="content" cols="30" rows="5" placeholder="Enter Your Query"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Send</button>
-            </div>
-        </div>
-    </form>
-</div>
+{% block custom_script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.9/typed.min.js" async defer></script>
+<script>
+    window.onload = function () {
+        console.log("loaded")
+        var typed = new Typed('#typed', {
+            strings: ["Anshu Prakash", "Django Developer", "Indian Institute of Information Technology Jabalpur", "Enjoy CodeIsFun...!"],
+            backSpeed: 30,
+            smartBackspace: true,
+            backDelay: 1200,
+            startDelay: 1000,
+            typeSpeed: 40,
+            loop: true,
+        });
+    };
+</script>
+{% endblock custom_script%}
+
 {% endblock body %}

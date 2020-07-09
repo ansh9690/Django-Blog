@@ -1,0 +1,23 @@
+{% extends 'account/base.html' %}
+{% block title %}CodeIsFun | Logged out{% endblock title %}
+{% block custom_css %}
+body {
+    background: #dedede;
+}
+.page-wrap {
+    min-height: 100vh;
+}
+{% endblock custom_css %}
+{% block body %}
+<div class="page-wrap d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+                <span class="display-3 d-block mb-4">Logged out</span>
+                <a href="{% url 'home:home' %}"> Back to Home </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}
+

@@ -1,22 +1,31 @@
 {% extends 'home/base.html' %}
-{% block title %}
- All Blog
-{% endblock title %}
+{% block title %}CodeIsFun | Blog{% endblock title %}
+{% block css %}
+div.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+{% endblock css %}
 
 {% block body %}
-
-{% for post in post %}
 <div class="container">
-    <h3 class="mt-4">Article</h3>
-    <div class="card my-3">
-      <div class="card-body">
-        <h5 class="card-title">{{ post.title }}</h5>
-        <h6>{{ post.author }}, {{ post.timeStamp }}</h6>
-        <p class="card-text">{{ post.content| truncatechars:500 }}</p>
-        <a href="{% url 'blog:post' post.slug %}" role="button" class="btn btn-outline-primary stretched-link">Continue Reading</a>
-      </div>
+    <h1 class="mt-5">Article</h1>
+    <hr style="height:3px;border:none;color:#333;background-color:#333;" />
+    {% for post in post %}
+    <div class="card my-4">
+        <div class="card-body ">
+            <h2 class="title">{{ post.title }}</h2>
+            <h4>Posted by {{ post.author }} on {{ post.timeStamp }}</h4>
+            <p class="text">{{ post.content| truncatechars:500 }}
+            <a href="{% url 'blog:post' post.slug %}" class="stretched-link text-dark font-weight-bold">Continue Reading</a></p>
+        </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
+{% block custom_script %}
+<script>
+
+</script>
+{% endblock custom_script %}
 
 {% endblock body %}

@@ -1,40 +1,97 @@
 {% extends 'home/base.html' %}
-{% block title %}
-All Blog
-{% endblock title %}
-
+{% block title %}CodeIsFun | Post{% endblock title %}
+{% block css %}
+div.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+{% endblock css %}
 {% block body %}
-
-<div class="container">
-  <h3 class="mt-4">Article</h3>
-  <div class="card my-3">
+{% load humanize %}
+{% load extras %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endfor %}
+<div class="container" xmlns="http://www.w3.org/1999/html">
+  <h1 class="mt-4">Article</h1>
+  <hr style="height:3px;border:none;color:#333;background-color:#333;" />
+  <div class="card my-4">
     <div class="card-body">
-      <h5 class="card-title">{{ post.title }}</h5>
-      <h6>{{ post.author }}, {{ post.timeStamp }}</h6>
-      <p class="card-text">{{ post.content }}</p>
+      <h2 class="title">{{ post.title }}</h2>
+      <h4>Posted by {{ post.author }} on {{ post.timeStamp }}</h4>
+      <p class="text">{{ post.content }}</p>
     </div>
   </div>
-  <h3 class="mt-4">You can share your views with us </h3>
-  <form method="POST" action="{% url 'blog:comment' %}">
-   {% csrf_token %}
-    <div class="form-group mt-3">
-      <input type="text" class="form-control w-100" name="comment" id="comment" placeholder="Enter your comment">
-      <input type="hidden" name="postId" value="{{ post.sno }}">
-      <button type="submit" class="btn btn-primary mt-2">Submit</button>
-    </div>
-  </form>
-  <h3>Comments</h3>
+  <h3 class="mt-5">Your Comment </h3>
+  <div class="my-4">
+    {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'blog:postComment' %}">
+      {% csrf_token %}
+      <div class="form-group mt-3">
+        <textarea class="form-control w-100" name="comment" id="comment" rows="3" required></textarea>
+      </div>
+      <input type="hidden" name="post_sno" value="{{ post.sno }}">
+      <input type="hidden" name="parent_sno" value="">
+      <button type="submit" class="btn btn-default">Post Comment</button>
+    </form>
+    {% else %}
+    <a role="button" class="btn btn-sm btn-dark" href="{% url 'account:login' %}">Login for comment</a>
+    {% endif%}
+  </div>
+  <h4>{{comments.count}} Comments</h4>
   {% for comments in comments %}
-  <div class="card mb-3 w-100">
-    <div class="card-body">
-      <h5 class="card-title">{{ comments.user.username }}</h5>
-      <p class="card-text"><small class="text-muted">{{ comments.addedTime }}</small></p>
-      <p class="card-text">{{ comments.comment }}</p>
+  <hr>
+  <div class="row my-3">
+    <div class="col-md-1">
+      <img class="rounded mx-auto w-100 d-block" src="/static/user.png" alt="user">
+    </div>
+    <div class="col-md-11">
+      <strong style="font-size:17px;">{{ comments.user.username }}</strong> <span class="badge badge-secondary"> {{ comments.timeStamp | naturaltime }}</span>
+      <div>{{ comments.comment }}</div>
+      <div class="reply mx-0">
+        {% if user.is_authenticated %}
+          <a role="button" data-toggle="collapse" data-target="#replyBox{{ comments.sno}}" aria-expanded="false" aria-controls="replyBox{{ comments.sno}}">
+            <small>Reply</small>
+          </a>
+          <div class="collapse" id="replyBox{{ comments.sno}}">
+            <form method="POST" action="{% url 'blog:postComment' %}">
+              {% csrf_token %}
+              <div class="form-group mt-3">
+                <textarea class="form-control w-100" name="comment" rows="3" required></textarea>
+                <input type="hidden" name="parent_sno" value="{{ comments.sno }}">
+              </div>
+              <input type="hidden" name="post_sno" value="{{ post.sno }}">
+              <button type="submit" class="btn btn-sm btn-default">Post Reply</button>
+            </form>
+          </div>
+          {% else %}
+          <a role="button" data-toggle="collapse"
+            data-target="#replyBox{{ comments.sno}}" aria-expanded="false" aria-controls="replyBox{{ comments.sno}}" disabled>
+            <small><a href="#" role="button" class="btn btn-sm btn-light border-0">Login for reply</a> </small>
+          </a>
+
+          {% endif %}
+        <div class="replies my-2">
+          {% for reply in replyDict|get_val:comments.sno %}
+          <div class="row my-3">
+              <div class="col-md-1">
+                <img class="rounded mx-auto w-100 d-block" src="/static/user.png" alt="user">
+              </div>
+          <div class="col-md-11">
+            <strong style="font-size:17px;">{{ reply.user.username }}</strong> <span class="badge badge-secondary"> {{ comments.timeStamp | naturaltime }}</span>
+          <div>{{reply.comment}}</div>
+          </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
     </div>
   </div>
   {% endfor %}
 </div>
-</div>
-
 
 {% endblock body %}

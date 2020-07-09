@@ -1,0 +1,86 @@
+{% extends 'account/base.html' %}
+{% block title %}CodeIsFun | Sign in {% endblock title %}
+{%  load crispy_forms_tags %}
+{% block custom_css %}
+body {
+    font-family: "Lato", sans-serif;
+}
+.sidenav {
+    height: 100%;
+    background-color: #000;
+    overflow-x: hidden;
+    padding-top: 100px;
+}
+.main {
+    padding: 0px 13%;
+}
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 30%;
+    }
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+    .login-form{
+        margin-top: 80%;
+    }
+}
+
+.login-text{
+    margin-top: 35%;
+    padding-left: 100px;
+    color: #fff;
+}
+
+.login-text h2{
+    font-weight: 300;
+}
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}
+.btn-black:hover{
+    color: #fff;
+}
+{% endblock custom_css %}
+
+{% block body %}
+<div class="sidenav">
+         <div class="login-text">
+            <h2>Sign in Page</h2>
+            <p>Sign in from here to access.</p>
+         </div>
+      </div>
+      <div class="main">
+         <div class="col-md-6 col-sm-12">
+             {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            {% endfor %}
+            <div class="login-form">
+                <form method="post" action="{% url 'account:login' %}">
+                    {% csrf_token %}
+                    <div class="form-group my-2">
+                        {{ form|crispy  }}
+                    </div>
+                    <button type="submit" class="btn btn-block btn-black">Login</button>
+                    <input type="hidden" name="next" value="{{ next }}">
+               </form>
+                <div class="mt-3">
+                    <a href="{% url 'account:password_reset' %}" style="color:black;">Forgot Password ?</a>
+                </div>
+            </div>
+         </div>
+      </div>
+{% block custom_javascript %}
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% endblock custom_javascript %}
+{% endblock body %}
