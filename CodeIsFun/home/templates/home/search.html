@@ -33,7 +33,7 @@ Search Results
         <h2 class="title">{{ post.title }}</h2>
         <h4>{{ post.author }}, {{ post.timeStamp }}</h4>
         <p class="text">{{ post.content| truncatechars:500 }}
-        <a href="{% url 'blog:post' post.slug %}" class="stretched-link text-dark font-weight-bold" >Continue Reading</a></p>
+        <a href="{% url 'blog:post' post.pk %}" class="stretched-link text-dark font-weight-bold" >Continue Reading</a></p>
       </div>
     {% endfor %}
 {% endif %}

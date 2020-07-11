@@ -1,0 +1,30 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{%  load crispy_forms_tags %}
+{% block title %}CodeIsFun | Create Article{% endblock title %}
+{% block css %}
+.article{
+    margin-top:40px;
+    margin-bottom:40px;
+}
+{% endblock css %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mt-4">Update Article</h1>
+    <hr style="height:3px;border:none;color:#333;background-color:#333;" />
+    <div class="article">
+        <form action="." method="post">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <button type="submit" class="btn btn-dark">Update Article</button>
+        </form>
+    </div>
+</div>
+
+{% block custom_script %}
+<!--<script src="{% static 'textEditor.js' %}"></script>-->
+<!--<script type="text/javascript" src="https://cdn.tiny.cloud/1/rfacfoihsy0aaj593rp0zxulvsz8abg3358f48w77zqyswtk/tinymce/5/tinymce.min.js" ></script>-->
+{% endblock custom_script %}
+
+{% endblock body %}

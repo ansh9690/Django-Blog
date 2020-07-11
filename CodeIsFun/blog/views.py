@@ -1,7 +1,7 @@
-from django.shortcuts import render, HttpResponse, redirect
-from .models import Post, BlogComment
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse, HttpResponseRedirect
+from .models import Post, BlogComment, PostForm, UpdatePostForm
 from django.contrib import messages
-from blog.templatetags import extras
+from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -12,8 +12,8 @@ def index(request):
     return render(request, 'blog/index.html', context)
 
 
-def post(request, slug):
-    post = Post.objects.filter(slug=slug).first()
+def post(request, pk):
+    post = Post.objects.filter(pk=pk).first()
     comments = BlogComment.objects.filter(post=post, parent=None)
     replies = BlogComment.objects.filter(post=post).exclude(parent=None)
     reply_dict = {}
@@ -29,6 +29,64 @@ def post(request, slug):
         'replyDict': reply_dict,
     }
     return render(request, 'blog/post.html', context)
+
+
+@login_required(login_url='account:login')
+def MyPost(request):
+    my_post = Post.objects.filter(author_name=request.user)
+    context = {
+        'post': my_post
+    }
+    return render(request, 'blog/mypost.html', context)
+
+
+@login_required(login_url='account:login')
+def DeletePost(request, pk):
+    delete_post = Post.objects.get(pk=pk)
+    if request.user == delete_post.author_name:
+        delete_post.delete()
+        messages.success(request, "Deleted Post")
+        return redirect('blog:my_post')
+
+
+@login_required(login_url='account:login')
+def CreatePost(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.author_name = request.user
+            instance.save()
+            messages.success(request, "Posted Successfully Article")
+            return redirect('blog:post', instance.sno)
+    else:
+        form = PostForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'blog/new_post.html', context)
+
+
+@login_required(login_url='account:login')
+def UpdatePost(request, pk):
+    update_post = Post.objects.get(pk=pk)
+    if request.user == update_post.author_name:
+        if request.method == 'POST':
+            form = UpdatePostForm(request.POST, instance=update_post)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.author_name = request.user
+                instance.save()
+                messages.success(request, "Posted Successfully Updated Article")
+                return redirect('blog:post', instance.sno)
+        else:
+            form = UpdatePostForm(instance=update_post)
+        context = {
+            'form': form
+        }
+        return render(request, 'blog/update_post.html', context)
+    else:
+        return HttpResponse("Invalid")
 
 
 def postComment(request):
@@ -47,4 +105,14 @@ def postComment(request):
             comment = BlogComment(comment=comment, user=user, post=post_comment, parent=parent)
             comment.save()
             messages.success(request, "Successfully posted reply comment")
-    return redirect(f"/blog/{post_comment.slug}")
+    return redirect(f"/blog/post/{post_comment.pk}")
+
+
+@login_required(login_url='account:login')
+def deleteComment(request, pk):
+    delete_comments = get_object_or_404(BlogComment, pk=pk)
+    if request.user == delete_comments.user:
+        delete_comments.delete()
+        messages.success(request, "Deleted Successfully")
+        return redirect(request.META['HTTP_REFERER'])
+

@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8ce5e142-1b51-494b-af61-908e9e3a284e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CodeIsFun/blog/templatetags/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CodeIsFun/blog/templatetags/extras.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeIsFun/CodeIsFun/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/CodeIsFun/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeIsFun/CodeIsFun/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/CodeIsFun/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeIsFun/account/templates/account/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/account/templates/account/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeIsFun/account/templates/account/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/account/templates/account/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeIsFun/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/account/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeIsFun/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/account/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeIsFun/blog/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/blog/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeIsFun/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/blog/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeIsFun/blog/templates/blog/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/blog/templates/blog/index.html" afterDir="false" />
@@ -19,7 +19,8 @@
       <change beforePath="$PROJECT_DIR$/CodeIsFun/home/templates/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/home/templates/home/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeIsFun/home/templates/home/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/home/templates/home/search.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CodeIsFun/home/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/home/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CodeIsFun/home/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/home/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeIsFun/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodeIsFun/static/textEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/CodeIsFun/static/textEditor.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +56,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\PycharmProjects\CodeIsFun\CodeIsFun\static" />
+      <recent name="D:\PycharmProjects\CodeIsFun\CodeIsFun\static\js" />
+      <recent name="D:\PycharmProjects\CodeIsFun\CodeIsFun\static\js\tinymce" />
       <recent name="D:\PycharmProjects\CodeIsFun\CodeIsFun\blog\templates\blog" />
       <recent name="D:\PycharmProjects\CodeIsFun\CodeIsFun\home\templates\home" />
-      <recent name="D:\PycharmProjects\CodeIsFun\CodeIsFun\home" />
     </key>
   </component>
   <component name="SvnConfiguration">

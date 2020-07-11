@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'account',
     'django.contrib.humanize',
     'tinymce',
+    'hitcount',
 ]
 
 MIDDLEWARE = [
@@ -117,7 +118,7 @@ STATICFILES_DIRS = [
 ]
 # Extra
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-LOGIN_REDIRECT_URL = '/'
+# LOGIN_REDIRECT_URL = '/'
 # LOGOUT_REDIRECT_URL = '/accounts'
 LOGIN_URL = 'account:login'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"

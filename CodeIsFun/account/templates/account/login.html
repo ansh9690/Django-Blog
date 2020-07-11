@@ -57,15 +57,15 @@ body {
       </div>
       <div class="main">
          <div class="col-md-6 col-sm-12">
-             {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-            {% endfor %}
             <div class="login-form">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                {% endfor %}
                 <form method="post" action="{% url 'account:login' %}">
                     {% csrf_token %}
                     <div class="form-group my-2">

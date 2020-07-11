@@ -39,9 +39,6 @@
     .dropdown:hover>.dropdown-menu {
       display: block;
     }
-    .dropdown>.dropdown-toggle:active {
-        pointer-events: none;
-    }
     .bg-dark{
       background-color: #000 !important;
       color: #fff;
@@ -80,9 +77,11 @@
          <div class="navbar-nav ml-auto">
              <div class="dropdown">
                  <a class="btn nav-link dropdown-toggle" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                    Hey {{ user.username}}
+                    Hey {{ user.username|title}}
                   </a>
                  <ul class="dropdown-menu"  aria-labelledby="dropdownMenuButton">
+                     <li><a class="dropdown-item"  href="{% url 'blog:my_post' %}">My Post</a></li>
+                     <li><a class="dropdown-item" href="{% url 'blog:create_post' %}">Create Post</a></li>
                      <li><a class="dropdown-item"  href="{% url 'account:logout' %}">Logout</a></li>
                      <li><a class="dropdown-item" href="{% url 'account:password_change' %}">Change Password</a></li>
                  </ul>
@@ -95,8 +94,6 @@
          </div>
         {% endif %}
       </div>
-    </div>
-    </div>
     </div>
   </nav>
 
