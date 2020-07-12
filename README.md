@@ -1,4 +1,4 @@
-# Blog
+# Django-Blog
 How do I run this project locally?
 1. Clone the repository: 
 ```git clone https://github.com/ansh9690/simple-django-login-register.git```
