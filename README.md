@@ -1,7 +1,7 @@
 # Django-Blog
 How do I run this project locally?
 1. Clone the repository: 
-```git clone https://github.com/ansh9690/simple-django-login-register.git```
+```git clone https://github.com/ansh9690/Django-Blog.git```
 2. pip install -r requirements.txt
 3. Run migrations:
 .```python manage.py migrate```
