@@ -27,7 +27,7 @@ body {
         left: 0;
     }
     .login-form{
-        margin-top: 25%;
+        margin-top: 60%;
     }
 }
 
@@ -71,7 +71,14 @@ body {
                 <form method="post" action="{% url 'account:register' %}">
                     {% csrf_token %}
                     <div class="form-group my-2">
-                        {{ form|crispy  }}
+					{% for field in form %}
+					  <p>
+						{{ field.label_tag }}<br>
+						{{ field }}
+						{% for error in field.errors %}
+					<p style="color: red">{{ error }}</p>
+						{% endfor %}
+					{% endfor %}
                     </div>
                     <button type="submit" class="btn btn-block btn-black">Sign up</button>
                </form>

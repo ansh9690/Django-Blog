@@ -4,8 +4,6 @@ from .forms import UserRegisterForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
-from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
 
 
 def home(request):

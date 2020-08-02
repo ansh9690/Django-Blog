@@ -51,7 +51,7 @@ div.card {
       <img class="rounded mx-auto w-100 d-block" src="/static/user.png" alt="user">
     </div>
     <div class="col-md-11">
-      <strong style="font-size:17px;">{{ comments.user.username }}</strong> <span class="badge badge-secondary"> {{ comments.timeStamp | naturaltime }}</span>
+      <strong style="font-size:17px;">{{ comments.user.username|title }}</strong> <span class="badge badge-secondary"> {{ comments.timeStamp | naturaltime }}</span>
       <div class="mb-2">{{ comments.comment }}</div>
       <div class="reply mx-0">
         {% if user == comments.user  %}
@@ -86,7 +86,7 @@ div.card {
                 <img class="rounded mx-auto w-100 d-block" src="/static/user.png" alt="user">
               </div>
           <div class="col-md-11">
-            <strong style="font-size:17px;">{{ reply.user.username }}</strong> <span class="badge badge-secondary"> {{ comments.timeStamp | naturaltime }}</span>
+            <strong style="font-size:17px;">{{ reply.user.username|title }}</strong> <span class="badge badge-secondary"> {{ comments.timeStamp | naturaltime }}</span>
           <div>{{reply.comment}}</div>
           </div>
           </div>
