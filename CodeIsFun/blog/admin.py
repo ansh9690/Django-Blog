@@ -1,8 +1,15 @@
 from django.contrib import admin
 from .models import Post, BlogComment
 
-# Register your models here.
-admin.site.register((Post, BlogComment))
+admin.site.register(BlogComment)
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('title', 'sno', 'author','timeStamp')
+    list_filter = ("title",)
+    search_fields = ['title', 'content']
+    prepopulated_fields = {'sno': ('title',)}
+
+admin.site.register(Post, PostAdmin)
 
 # @admin.register(Post)
 # class PostAdmin(admin.ModelAdmin):
